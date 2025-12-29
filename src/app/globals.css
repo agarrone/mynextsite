@@ -26,7 +26,11 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1c222e;
+  --text-primary: #1c222e;
+  --text-muted: #7a7a7a;
+  --border: #e5e5e5;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -35,16 +39,18 @@
   --font-sans: "Satoshi", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root[data-theme="dark"] {
+  --background: #0d0d0d;
+  --foreground: #f0f5ff;
+  --text-primary: #f0f5ff;
+  --text-muted: #9c9c9c;
+  --border: #2a2a2a;
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
-  color: #1c222e;
+  color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 14px;
 }

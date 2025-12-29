@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Antonin Garrone",
@@ -17,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <div className="fixed right-5 top-5 z-50 flex items-center gap-3">
+          <ThemeToggle />
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

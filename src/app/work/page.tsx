@@ -60,12 +60,12 @@ const workItems = [
 
 export default function WorkPage() {
   return (
-    <div className="flex min-h-screen justify-center bg-[#ffffff] text-[#1c222e]">
-      <main className="w-full max-w-[550px] px-2">
+    <div className="flex min-h-screen justify-center bg-[var(--background)] text-[var(--text-primary)]">
+      <main className="w-full max-w-[550px] px-5 sm:px-4 md:px-6">
         <section className="fade-up flex flex-col gap-5 py-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[16px] text-[#7a7a7a] hover:text-[#1c222e] hover:underline"
+            className="inline-flex items-center gap-2 text-[16px] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:underline"
           >
             <Undo2 className="h-4 w-4" />
             Home
@@ -73,7 +73,7 @@ export default function WorkPage() {
 
           <div className="flex flex-col gap-2.5">
             <h1 className="text-[20px] font-semibold leading-[1.6]">Work</h1>
-            <p className="text-[16px] leading-relaxed text-[#1c222e]">
+            <p className="text-[16px] leading-relaxed text-[var(--text-primary)]">
               Aspirant à une action publique plus ouverte et transparente, je
               suis product manager avec un intérêt marqué pour le design
               produit.
@@ -82,7 +82,7 @@ export default function WorkPage() {
               href="https://drive.google.com/file/d/1IV_B-LKwwtt3maLDK1G2l9kSsxmphCQk/view?usp=sharing"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-[16px] text-[#7a7a7a] hover:text-[#1c222e] hover:underline"
+              className="inline-flex items-center gap-2 text-[16px] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:underline"
             >
               <Download className="h-4 w-4" />
               PDF
@@ -102,15 +102,15 @@ export default function WorkPage() {
                     href={item.companyHref}
                     target="_blank"
                     rel="noreferrer"
-                    className="truncate text-[#1c222e] hover:underline"
+                    className="truncate text-[var(--text-primary)] hover:underline"
                   >
                     {item.company}
                   </a>
-                  <span className="text-[#7a7a7a]">-</span>
-                  <span className="text-[#7a7a7a]">{item.role}</span>
+                  <span className="text-[var(--text-muted)]">-</span>
+                  <span className="text-[var(--text-muted)]">{item.role}</span>
                 </div>
-                <div className="text-[16px] text-[#7a7a7a]">{item.date}</div>
-                <p className="text-[16px] leading-relaxed text-[#1c222e]">
+                <div className="text-[16px] text-[var(--text-muted)]">{item.date}</div>
+                <p className="text-[16px] leading-relaxed text-[var(--text-primary)]">
                   {item.description}
                 </p>
               </div>
