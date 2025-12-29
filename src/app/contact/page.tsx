@@ -30,7 +30,7 @@ export default function ContactPage() {
               className="inline-flex items-center gap-2 hover:text-[var(--text-primary)] hover:underline"
             >
               <Mail className="h-4 w-4" />
-              Write mail
+              Écrivez-moi
             </a>
             <a
               href="https://www.linkedin.com/in/antonin-garrone-8272bb154/"
