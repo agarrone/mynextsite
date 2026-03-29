@@ -12,18 +12,45 @@ export type NotionEntry = {
   category: string | null;
 };
 
+const rawToken = process.env.NOTION_TOKEN?.trim();
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: rawToken,
 });
 
+const extractDatabaseId = (value?: string) => {
+  if (!value) {
+    return undefined;
+  }
+
+  const trimmedValue = value.trim();
+  const match = trimmedValue.match(/[0-9a-fA-F]{32}/);
+  return match?.[0] ?? undefined;
+};
+
 const rawDatabaseId = process.env.NOTION_DATABASE_ID;
-const databaseId = rawDatabaseId ? rawDatabaseId.split("?")[0] : undefined;
+const databaseId = extractDatabaseId(rawDatabaseId);
 
 let dataSourceIdPromise: Promise<string | null> | null = null;
 
+const hasUsableToken = () => {
+  if (!rawToken) {
+    return false;
+  }
+
+  return rawToken !== "ok";
+};
+
 const getDataSourceId = async () => {
+  if (!hasUsableToken()) {
+    throw new Error(
+      "NOTION_TOKEN is missing or still set to a placeholder value."
+    );
+  }
+
   if (!databaseId) {
-    throw new Error("NOTION_DATABASE_ID is not set.");
+    throw new Error(
+      "NOTION_DATABASE_ID is missing or does not contain a valid Notion database ID."
+    );
   }
 
   if (!dataSourceIdPromise) {
@@ -96,37 +123,45 @@ const getUrl = (page: PageObjectResponse) => {
 };
 
 export const fetchNotionEntries = async (category?: string) => {
-  const dataSourceId = await getDataSourceId();
-  if (!dataSourceId) {
-    throw new Error("Notion data source ID not found for the database.");
+  try {
+    const dataSourceId = await getDataSourceId();
+    if (!dataSourceId) {
+      throw new Error("Notion data source ID not found for the database.");
+    }
+
+    const response = await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      filter: category
+        ? {
+            property: "Catégorie",
+            select: {
+              equals: category,
+            },
+          }
+        : undefined,
+      sorts: [
+        { property: "Year", direction: "descending" },
+        { property: "Name", direction: "ascending" },
+      ],
+    });
+
+    return response.results
+      .filter((page): page is PageObjectResponse => "properties" in page)
+      .map((page) => ({
+        id: page.id,
+        title: getTitle(page),
+        url: getUrl(page),
+        year: getYear(page),
+        coverUrl: getCoverUrl(page),
+        category: getCategory(page),
+      }));
+  } catch (error) {
+    console.error(
+      `Failed to fetch Notion entries${category ? ` for ${category}` : ""}.`,
+      error
+    );
+    return [];
   }
-
-  const response = await notion.dataSources.query({
-    data_source_id: dataSourceId,
-    filter: category
-      ? {
-          property: "Catégorie",
-          select: {
-            equals: category,
-          },
-        }
-      : undefined,
-    sorts: [
-      { property: "Year", direction: "descending" },
-      { property: "Name", direction: "ascending" },
-    ],
-  });
-
-  return response.results
-    .filter((page): page is PageObjectResponse => "properties" in page)
-    .map((page) => ({
-      id: page.id,
-      title: getTitle(page),
-      url: getUrl(page),
-      year: getYear(page),
-      coverUrl: getCoverUrl(page),
-      category: getCategory(page),
-    }));
 };
 
 export const groupEntriesByYear = (entries: NotionEntry[]) => {

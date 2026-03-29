@@ -3,6 +3,7 @@ import "./globals.css";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mynextsite-gamma.vercel.app/"),
   title: "Antonin Garrone",
   description:
     "Product manager based in Paris, currently leading the public data platform data.gouv.fr.",
