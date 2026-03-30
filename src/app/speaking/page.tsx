@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Undo2 } from "lucide-react";
 import { fetchNotionEntries, groupEntriesByYear } from "@/lib/notion";
 
+export const revalidate = 1800;
+
 const SPEAKING_CATEGORY = "Speaking";
 
 const teachingEntries = [
