@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   description:
     "Product manager based in Paris, currently leading the public data platform data.gouv.fr.",
   icons: {
-    icon: "/frog/Favicon.png",
+    icon: [
+      { url: "/frog/Favicon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/frog/Favicon.png",
+    apple: "/frog/Favicon.png",
   },
   openGraph: {
     title: "Antonin Garrone",
