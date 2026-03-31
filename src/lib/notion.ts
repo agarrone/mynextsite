@@ -2,6 +2,7 @@ import "server-only";
 
 import { Client } from "@notionhq/client";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { unstable_noStore as noStore } from "next/cache";
 
 export type NotionEntry = {
   id: string;
@@ -124,6 +125,8 @@ const getUrl = (page: PageObjectResponse) => {
 
 export const fetchNotionEntries = async (category?: string) => {
   try {
+    noStore();
+
     const dataSourceId = await getDataSourceId();
     if (!dataSourceId) {
       throw new Error("Notion data source ID not found for the database.");

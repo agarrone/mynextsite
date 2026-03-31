@@ -3,6 +3,7 @@ import { Undo2 } from "lucide-react";
 import { fetchNotionEntries, groupEntriesByYear } from "@/lib/notion";
 
 export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 const SPEAKING_CATEGORY = "Speaking";
 
