@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Antonin Garrone",
   description:
     "Product manager based in Paris, currently leading the public data platform data.gouv.fr.",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/frog/Favicon.png", type: "image/png" },
@@ -36,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <script
           async

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import InteractiveFrog from "../components/InteractiveFrog";
 
 const navLabels = {
@@ -7,11 +8,52 @@ const navLabels = {
   contact: "Contact & Socials",
 };
 
+export const metadata: Metadata = {
+  title: "Antonin Garrone | Product Manager",
+  description:
+    "Antonin Garrone is a product manager based in Paris, currently leading the public data platform data.gouv.fr.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Antonin Garrone",
+  url: "https://agarrone.fr",
+  image: "https://agarrone.fr/og.png",
+  jobTitle: "Product Manager",
+  worksFor: {
+    "@type": "Organization",
+    name: "data.gouv.fr",
+    url: "https://www.data.gouv.fr",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Paris",
+    addressCountry: "FR",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/antonin-garrone-8272bb154/",
+    "https://github.com/agarrone",
+    "https://x.com/antonin_garrone",
+    "https://bsky.app/profile/agarrone.bsky.social",
+    "https://mastodon.social/@agarrone",
+  ],
+};
+
 export default function Home() {
   return (
     <div className="flex min-h-screen justify-center bg-[var(--background)] text-[var(--text-primary)]">
       <main className="flex min-h-screen w-full max-w-[550px] flex-col justify-center px-5 sm:px-4 md:px-6">
         <section className="fade-up flex flex-col gap-2.5 py-10">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personSchema),
+            }}
+          />
           <InteractiveFrog />
 
           <div className="flex flex-col gap-2.5">

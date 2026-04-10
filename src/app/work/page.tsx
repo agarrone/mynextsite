@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Download, Undo2 } from "lucide-react";
 
@@ -57,6 +58,15 @@ const workItems = [
     image: "/work/afd.png",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Work | Antonin Garrone",
+  description:
+    "Work experience of Antonin Garrone across DINUM, data.gouv.fr, Etalab, OpenFisca, and the Agence Française de Developpement.",
+  alternates: {
+    canonical: "/work",
+  },
+};
 
 export default function WorkPage() {
   return (

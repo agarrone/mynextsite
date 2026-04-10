@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Undo2 } from "lucide-react";
 import { fetchNotionEntries, groupEntriesByYear } from "@/lib/notion";
@@ -6,6 +7,15 @@ export const revalidate = 1800;
 export const dynamic = "force-dynamic";
 
 const SPEAKING_CATEGORY = "Speaking";
+
+export const metadata: Metadata = {
+  title: "Speaking | Antonin Garrone",
+  description:
+    "Talks, lectures, and speaking engagements by Antonin Garrone on product, public digital services, and open data.",
+  alternates: {
+    canonical: "/speaking",
+  },
+};
 
 const teachingEntries = [
   {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Undo2 } from "lucide-react";
 import { fetchNotionEntries, groupEntriesByYear } from "@/lib/notion";
@@ -6,6 +7,15 @@ export const revalidate = 1800;
 export const dynamic = "force-dynamic";
 
 const WRITING_CATEGORY = "Writing";
+
+export const metadata: Metadata = {
+  title: "Writing | Antonin Garrone",
+  description:
+    "Articles, essays, and notes by Antonin Garrone on product management, public interest technology, and open data.",
+  alternates: {
+    canonical: "/writing",
+  },
+};
 
 export default async function WritingPage() {
   const entries = await fetchNotionEntries(WRITING_CATEGORY);

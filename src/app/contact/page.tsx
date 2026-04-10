@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Github, Linkedin, Mail, Undo2, Twitter } from "lucide-react";
 import MastodonLineIcon from "remixicon-react/MastodonLineIcon";
+
+export const metadata: Metadata = {
+  title: "Contact | Antonin Garrone",
+  description:
+    "Contact Antonin Garrone and find his profiles on LinkedIn, GitHub, X, Bluesky, and Mastodon.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default function ContactPage() {
   return (
